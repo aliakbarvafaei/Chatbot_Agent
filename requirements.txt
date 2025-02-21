@@ -102,3 +102,4 @@ lancedb
 pandas
 sentence_transformers
 ollama
+ipywidgets

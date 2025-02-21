@@ -1,0 +1,180 @@
+{
+    "query": "I want a beautifuly header:\n                             in the right a image box have logo and title of website.\n                             in the left many item link that each of them have a icon and text.\n                             like : link to shoppage, link to about us page, link to contact us page.\n                             and at the end of left side a button for login.\n                             ",
+    "is_relevant": true,
+    "tasks": [
+        {
+            "title": "Create a container tag for the header with appropriate styles.",
+            "result_task": {
+                "title": "Header Container",
+                "component_code": "",
+                "description": "This component creates a header container with appropriate styles.",
+                "states": [
+                    {
+                        "name": "headerTitle",
+                        "defaultValue": "Welcome to the Header",
+                        "type": "STRING"
+                    }
+                ],
+                "props": [
+                    {
+                        "name": "title",
+                        "type": "STRING"
+                    }
+                ],
+                "functions": [],
+                "jsx_code": "<KdSegment expandable={true} defaultOpen={true} label={props.title || state.headerTitle}>\n  <KdTypography variant=\"h1\" type=\"string\" title={props.title || state.headerTitle} />\n</KdSegment>",
+                "elementTypes": [
+                    "HEADER_FIELD",
+                    "TYPOGRAPHY"
+                ]
+            }
+        },
+        {
+            "title": "Create a tag for the image box on the right with logo and title.",
+            "result_task": {
+                "title": "Image Box with Logo and Title",
+                "component_code": "import React from 'react';\nimport KdImageBox from './KdImageBox';\nimport KdTypography from './KdTypography';\nimport KdpaGrid from './KdpaGrid';\n\nconst ImageBoxWithLogo = ({ imageSrc, imageAlt, logoSrc, logoAlt, title }) => {\n  return (\n    <KdpaGrid container>\n      <KdpaGrid item xs={12} sm={6} md={4}>\n        <KdImageBox src={imageSrc} alt={imageAlt} modal={true} quality=\"HIGH\" loading=\"lazy\" />\n      </KdpaGrid>\n      <KdpaGrid item xs={12} sm={6} md={8}>\n        <KdImageBox src={logoSrc} alt={logoAlt} modal={false} quality=\"LOW\" loading=\"lazy\" />\n        <KdTypography variant=\"h6\" title={title} />\n      </KdpaGrid>\n    </KdpaGrid>\n  );\n};\n\nexport default ImageBoxWithLogo;",
+                "description": "This component creates an image box on the right with a logo and title.",
+                "states": [],
+                "props": [
+                    {
+                        "name": "imageSrc",
+                        "type": "STRING"
+                    },
+                    {
+                        "name": "imageAlt",
+                        "type": "STRING"
+                    },
+                    {
+                        "name": "logoSrc",
+                        "type": "STRING"
+                    },
+                    {
+                        "name": "logoAlt",
+                        "type": "STRING"
+                    },
+                    {
+                        "name": "title",
+                        "type": "STRING"
+                    }
+                ],
+                "functions": [],
+                "jsx_code": "<KdpaGrid container>\n  <KdpaGrid item xs={12} sm={6} md={4}>\n    <KdImageBox src=\"imageSrc\" alt=\"imageAlt\" modal={true} quality=\"HIGH\" loading=\"lazy\" />\n  </KdpaGrid>\n  <KdpaGrid item xs={12} sm={6} md={8}>\n    <KdImageBox src=\"logoSrc\" alt=\"logoAlt\" modal={false} quality=\"LOW\" loading=\"lazy\" />\n    <KdTypography variant=\"h6\" title=\"title\" />\n  </KdpaGrid>\n</KdpaGrid>",
+                "elementTypes": [
+                    "IMAGE_BOX",
+                    "TYPOGRAPHY",
+                    "LAYOUT_CELL",
+                    "LAYOUT"
+                ]
+            }
+        },
+        {
+            "title": "Create a tag for the navigation links on the left.",
+            "result_task": {
+                "title": "Navigation Links Tag",
+                "component_code": "",
+                "description": "A tag component for navigation links on the left.",
+                "states": [],
+                "props": [],
+                "functions": [],
+                "jsx_code": "<KdpaGrid container>\n  <KdpaGrid item xs={12}>\n    <Link title=\"Home\" href=\"/home\" target=\"default\">\n      Home\n    </Link>\n  </KdpaGrid>\n  <KdpaGrid item xs={12}>\n    <Link title=\"About\" href=\"/about\" target=\"default\">\n      About\n    </Link>\n  </KdpaGrid>\n  <KdpaGrid item xs={12}>\n    <Link title=\"Contact\" href=\"/contact\" target=\"default\">\n      Contact\n    </Link>\n  </KdpaGrid>\n</KdpaGrid>",
+                "elementTypes": [
+                    "DIV",
+                    "HYPER_LINK"
+                ]
+            }
+        },
+        {
+            "title": "Create individual tags for each navigation link with an icon and text (Shop Page, About Us, Contact Us).",
+            "result_task": {
+                "title": "Navigation Links with Icons and Text",
+                "component_code": "",
+                "description": "Creates navigation links for Shop Page, About Us, and Contact Us with associated icons and text.",
+                "states": [
+                    {
+                        "name": "navigationLinks",
+                        "defaultValue": "[{icon: '<MdShoppingCart />', text: 'Shop Page'}, {icon: '<MdInfoOutline />', text: 'About Us'}, {icon: '<MdContactMail />', text: 'Contact Us'}]",
+                        "type": "ARRAY"
+                    }
+                ],
+                "props": [],
+                "functions": [],
+                "jsx_code": "<KdpaGrid container>\n  {navigationLinks.map((link, index) => (\n    <KdpaGrid item xs={12} sm={4} key={index}>\n      <KdTooltip title={link.text}>\n        <KdpaIconButton title={link.text} icon={link.icon} />\n      </KdTooltip>\n      <KdTypography title={link.text} variant=\"body1\" />\n    </KdpaGrid>\n  ))}\n</KdpaGrid>",
+                "elementTypes": [
+                    "LAYOUT",
+                    "LAYOUT_CELL",
+                    "TOOLTIP",
+                    "ICON_BUTTON",
+                    "TYPOGRAPHY"
+                ]
+            }
+        },
+        {
+            "title": "Create a tag for the button on the left side for login.",
+            "result_task": {
+                "title": "Login Button Component",
+                "component_code": "",
+                "description": "This component creates a button on the left side for login using the KdpaPrimaryButton.",
+                "states": [],
+                "props": [],
+                "functions": [],
+                "jsx_code": "<KdpaPrimaryButton variant=\"contained\" children=\"Login\" title=\"Login Button\" />",
+                "elementTypes": [
+                    "BUTTON"
+                ]
+            }
+        },
+        {
+            "title": "Ensure proper alignment and styling for the header layout.",
+            "result_task": {
+                "title": "Header Layout Alignment and Styling",
+                "component_code": "",
+                "description": "This component ensures the proper alignment and styling of the header using defined UI elements.",
+                "states": [
+                    {
+                        "name": "alertTitle",
+                        "defaultValue": "Welcome to the Header",
+                        "type": "STRING"
+                    },
+                    {
+                        "name": "alertSeverity",
+                        "defaultValue": "info",
+                        "type": "STRING"
+                    },
+                    {
+                        "name": "buttonTitle",
+                        "defaultValue": "Click Me",
+                        "type": "STRING"
+                    },
+                    {
+                        "name": "buttonLoading",
+                        "defaultValue": "false",
+                        "type": "BOOLEAN"
+                    }
+                ],
+                "props": [],
+                "functions": [],
+                "jsx_code": "<KdpaGrid container>\n  <KdpaGrid item xs={12} sm={6} md={4}>\n    <KdAlert severity={alertSeverity} title={alertTitle} />\n  </KdpaGrid>\n  <KdpaGrid item xs={12} sm={6} md={4}>\n    <KdTypography variant=\"h1\" title=\"Header Layout\" />\n  </KdpaGrid>\n  <KdpaGrid item xs={12} sm={6} md={4}>\n    <KdpaPrimaryButton title={buttonTitle} variant=\"contained\" loading={buttonLoading} />\n  </KdpaGrid>\n</KdpaGrid>",
+                "elementTypes": [
+                    "ALERT",
+                    "LAYOUT",
+                    "LAYOUT_CELL",
+                    "TYPOGRAPHY",
+                    "BUTTON"
+                ]
+            }
+        }
+    ],
+    "final_result": {
+        "title": "Create container for header",
+        "component_code": "import React from 'react';\nimport KdpaGrid from './KdpaGrid';\n\nconst HeaderContainer = ({ children }) => {\n  return (\n    <KdpaGrid container>\n      {children}\n    </KdpaGrid>\n  );\n};\n\nexport default HeaderContainer;",
+        "description": "A container for the header with appropriate styles and layout.",
+        "states": [],
+        "props": [],
+        "functions": [],
+        "jsx_code": "<KdpaGrid container>{children}</KdpaGrid>",
+        "elementTypes": [
+            "DIV"
+        ]
+    }
+}
